@@ -11,9 +11,11 @@ const message = require('./routes/api/message');
 const child = require('./routes/api/child');
 const calendar = require('./routes/api/calendar');
 const activities = require('./routes/api/activities');
+const cors = require('cors');
 
 
 const app = express();
+app.use(cors());
 
 //Body parser middleware
 app.use(bodyParser.urlencoded({extended: false}));
@@ -31,6 +33,14 @@ mongoose
 app.use(passport.initialize());
 
 require('./config/passport')(passport);
+
+//enable CORS
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 
 //Use routes
 app.use('/api/user', user);

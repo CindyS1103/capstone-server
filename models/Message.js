@@ -15,18 +15,15 @@ const MessageSchema = new Schema({
     type: String,
     required: true
   },
-  subject: {
+  provider_name: {
     type: String,
     required: true
   },
-  to_user: {
-    type: String,
-    required: true
-  },
-  from_user:{
+  child_name: {
     type: String,
     required: true
   }
+
 
 });
 

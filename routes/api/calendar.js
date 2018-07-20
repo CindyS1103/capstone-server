@@ -35,9 +35,11 @@ router.get('/:id', passport.authenticate('jwt', { session: false }), (req, res) 
 // @desc    Create calendar
 // @access  Private
 router.post('/', passport.authenticate('jwt', { session: false }), (req, res) => { const errors = {};
+
+    console.log(req.user);
     const newCalendar = new Calendar({
       date: req.body.date,
-      provider_name: req.body.provider_name,
+      event_name: req.body.event_name,
       assigned_child: req.body.assigned_child,
       child_img: req.body.child_img,
       child_age: req.body.child_age,
@@ -46,7 +48,11 @@ router.post('/', passport.authenticate('jwt', { session: false }), (req, res) =>
       hours_type: req.body.hours_type,
       hours: req.body.hours,
       pickup_time: req.body.pickup_time,
-      activities: req.body.activities
+      activities_location: req.body.activities_location,
+      activities_start: req.body.activities_start,
+      activities_end: req.body.activities_end,
+      user:req.user,
+      notes: req.body.notes
 
     });
     newCalendar.save().then(calendar => res.json(calendar));
@@ -63,14 +69,18 @@ router.delete('/:id', passport.authenticate('jwt', { session: false }), (req, re
   .catch(err =>
     res.status(404).json('Unable to delete calendar')
   );
-  res.send('calendar deleted sucessfully');
+  
 });
 // @route   PATCH api/calendar/edit
 // @desc    Update calendar
 // @access  Private
-router.patch('/edit/:id', passport.authenticate('jwt', { session: false }), (req, res, next) => { const errors = {};
+router.patch('/edit/:id', passport.authenticate('jwt', { session: false }), (req, res, next) => {
+      const errors = {};
 
-      Calendar.update({_id: req.params.id}, {$set:{'provider_name': req.body.provider_name, 'date': req.body.date, 'assigned_child': req.body.assigned_child, 'child_img': req.body.child_img, 'child_img': req.body.child_img, 'child_age': req.body.child_age, 'pickup_address': req.body.pickup_address, 'parent_name': req.body.parent_name, 'hours_type': req.body.hours_type, 'hours': req.body.hours, 'pickup_time': req.body.pickup_time, 'activities': req.body.activities}}, (err, result) => {
+      Calendar.update({_id: req.params.id}, {$set:{'date': req.body.date, 'assigned_child': req.body.assigned_child, 'child_img': req.body.child_img, 'child_img': req.body.child_img, 'child_age': req.body.child_age, 'pickup_address': req.body.pickup_address, 'parent_name': req.body.parent_name, 'hours_type': req.body.hours_type, 'hours': req.body.hours, 'pickup_time': req.body.pickup_time, 'event_name': req.body.event_name,
+      'activities_location': req.body.activities_location,
+      'activities_start': req.body.activities_start,
+      'activities_end': req.body.activities_end, 'notes': req.body.notes}}, (err, result) => {
         if(err) {
           throw err;
         }

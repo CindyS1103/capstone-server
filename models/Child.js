@@ -38,6 +38,10 @@ const ChildSchema = new Schema({
   notes:{
     type: String,
     required: true
+  },
+  assigned_provider:{
+    type: Schema.Types.ObjectId,
+    ref: 'provider'
   }
 
 });

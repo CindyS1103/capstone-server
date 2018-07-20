@@ -12,42 +12,54 @@ const CalendarSchema = new Schema({
     default: Date.now
   },
   provider_name: {
-    type: String,
-    required: true
+    type: String
+
   },
   assigned_child: {
-    type: String,
-    required: true
+    type: String
+
   },
   child_age: {
-    type: Number,
-    required: true
+    type: Number
+
   },
   child_img:{
     type: String
 
   },
   pickup_address:{
-    type: String,
-    required: true
+    type: String
+
   },
   parent_name:{
-    type: String,
-    required: true
+    type: String
+
   },
   hours_type:{
-    type: String,
-    required: true
+    type: String
+
   },
   hours:{
-    type: Number,
-    required: true
+    type: Number
+
   },
   pickup_time:{
-    type: String,
-    required: true
+    type: String
+
   },
-  activities:{
+  event_name:{
+    type: String
+  },
+  activities_location:{
+    type: String
+  },
+  activities_start:{
+    type: String
+  },
+  activities_end:{
+    type: String
+  },
+  notes:{
     type: String
   }
 

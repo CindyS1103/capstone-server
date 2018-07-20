@@ -38,9 +38,9 @@ router.post('/', passport.authenticate('jwt', { session: false }), (req, res) =>
     const newMessage = new Message({
       date: req.body.date,
       body: req.body.body,
-      subject: req.body.subject,
-      to_user: req.body.to_user,
-      from_user: req.body.from_user
+      child_name: req.body.child_name,
+      provider_name: req.body.provider_name
+
 
     });
     newMessage.save().then(message => res.json(message));
@@ -64,7 +64,7 @@ router.delete('/:id', passport.authenticate('jwt', { session: false }), (req, re
 // @access  Private
 router.patch('/edit/:id', passport.authenticate('jwt', { session: false }), (req, res, next) => { const errors = {};
 
-      Message.update({_id: req.params.id}, {$set:{'body': req.body.body, 'date': req.body.date, 'subject': req.body.subject, 'to_user': req.body.to_user, 'from_user': req.body.from_user}}, (err, result) => {
+      Message.update({_id: req.params.id}, {$set:{'body': req.body.body, 'date': req.body.date, 'providder_name': req.body.provider_name, 'child_name': req.body.child_name}}, (err, result) => {
         if(err) {
           throw err;
         }

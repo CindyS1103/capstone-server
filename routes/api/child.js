@@ -60,7 +60,7 @@ router.delete('/:id', passport.authenticate('jwt', { session: false }), (req, re
   .catch(err =>
     res.status(404).json('Unable to delete child')
   );
-  res.send('child deleted sucessfully');
+
 });
 // @route   PATCH api/child/edit
 // @desc    Update child

@@ -8,8 +8,10 @@ const ProviderSchema = new Schema({
     ref: 'user'
   },
   age: {
-    type: Number,
-    required: true
+    type: String
+  },
+  birthdate: {
+    type: String
   },
   vehicle: {
     type: String
@@ -18,12 +20,20 @@ const ProviderSchema = new Schema({
     type: String
   },
   name: {
-    type: String,
-    required: true
+    type: String
   },
+  address: {
+    type: String
+},
   notes: {
     type: String
   },
+  email: {
+    type: String
+  },
+  phone: {
+    type: String
+  }
 
 });
 

@@ -42,7 +42,8 @@ router.post('/register', (req, res) => {
         name: req.body.name,
         email: req.body.email,
         avatar,
-        password: req.body.password
+        password: req.body.password,
+        user_type: req.body.user_type
       });
 
       bcrypt.genSalt(10, (err, salt) => {
@@ -71,6 +72,9 @@ router.post('/login', (req, res) => {
 
   const email = req.body.email;
   const password = req.body.password;
+  const user_type = req.body.user_type;
+  const user_id = req.body.user_id;
+  const name = req.body.name
 
   // Find user by email
   User.findOne({ email }).then(user => {
@@ -84,17 +88,22 @@ router.post('/login', (req, res) => {
     bcrypt.compare(password, user.password).then(isMatch => {
       if (isMatch) {
         // User Matched
-        const payload = { id: user.id, name: user.name, avatar: user.avatar }; // Create JWT Payload
+        const payload = { id: user.id, name: user.name, avatar: user.avatar, user_type: user.user_type}; // Create JWT Payload
 
         // Sign Token
         jwt.sign(
           payload,
           keys.secretOrKey,
-          { expiresIn: 3600 },
+          { expiresIn: 36000 },
           (err, token) => {
             res.json({
               success: true,
-              token: 'Bearer ' + token
+              token: 'Bearer ' + token,
+              user_type: user.user_type,
+              user_id: user.id,
+              user_name: user.name
+
+
             });
           }
         );

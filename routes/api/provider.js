@@ -41,7 +41,11 @@ router.post('/', passport.authenticate('jwt', { session: false }), (req, res) =>
       age: req.body.age,
       provider_img: req.body.provider_img,
       vehicle: req.body.vehicle,
-      notes: req.body.notes
+      address: req.body.address,
+      notes: req.body.notes,
+      birthdate: req.body.birthdate,
+      email: req.body.email,
+      phone: req.body.phone
     });
     newProvider.save().then(provider => res.json(provider));
     res.send('provider created sucessfully');
@@ -63,7 +67,7 @@ router.delete('/:id', passport.authenticate('jwt', { session: false }), (req, re
 // @access  Private
 router.patch('/edit/:id', passport.authenticate('jwt', { session: false }), (req, res, next) => { const errors = {};
 
-      Provider.update({_id: req.params.id}, {$set:{'name': req.body.name, 'date': req.body.date, 'vehicle': req.body.vehicle, 'age': req.body.vehicle, 'notes': req.body.notes, 'provider_img': req.body.provider_img}}, (err, result) => {
+      Provider.update({_id: req.params.id}, {$set:{'name': req.body.name, 'date': req.body.date, 'address': req.body.address, 'vehicle': req.body.vehicle, 'age': req.body.vehicle, 'birthdate': req.body.birthdate, 'notes': req.body.notes, 'provider_img': req.body.provider_img, 'email': req.body.email, 'phone': req.body.phone}}, (err, result) => {
         if(err) {
           throw err;
         }
