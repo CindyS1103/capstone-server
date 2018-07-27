@@ -38,10 +38,10 @@ router.post('/', passport.authenticate('jwt', { session: false }), (req, res) =>
     const newMessage = new Message({
       date: req.body.date,
       body: req.body.body,
-      child_name: req.body.child_name,
-      provider_name: req.body.provider_name
-
-
+      subject: req.body.subject,
+      recipient: req.body.recipient,
+      sender: req.body.sender,
+      reply: req.body.reply
     });
     newMessage.save().then(message => res.json(message));
     res.send('message created sucessfully');
@@ -57,14 +57,14 @@ router.delete('/:id', passport.authenticate('jwt', { session: false }), (req, re
   .catch(err =>
     res.status(404).json('Unable to delete message')
   );
-  res.send('message deleted sucessfully');
+
 });
 // @route   PATCH api/message/edit
 // @desc    Update message
 // @access  Private
 router.patch('/edit/:id', passport.authenticate('jwt', { session: false }), (req, res, next) => { const errors = {};
 
-      Message.update({_id: req.params.id}, {$set:{'body': req.body.body, 'date': req.body.date, 'providder_name': req.body.provider_name, 'child_name': req.body.child_name}}, (err, result) => {
+      Message.update({_id: req.params.id}, {$set:{'body': req.body.body, 'date': req.body.date, 'recipient': req.body.recipient, 'sender': req.body.sender, 'subject': req.body.subject, 'reply': req.body.reply}}, (err, result) => {
         if(err) {
           throw err;
         }

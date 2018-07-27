@@ -12,16 +12,21 @@ const MessageSchema = new Schema({
     default: Date.now
   },
   body: {
-    type: String,
-    required: true
+    type: String
+
   },
-  provider_name: {
-    type: String,
-    required: true
+  subject: {
+    type: String
+
   },
-  child_name: {
-    type: String,
-    required: true
+  recipient: {
+    type: String
+  },
+  sender: {
+    type: String
+  },
+  reply:{
+    type: String
   }
 
 

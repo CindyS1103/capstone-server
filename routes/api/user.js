@@ -102,8 +102,6 @@ router.post('/login', (req, res) => {
               user_type: user.user_type,
               user_id: user.id,
               user_name: user.name
-
-
             });
           }
         );

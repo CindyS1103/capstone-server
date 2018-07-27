@@ -13,8 +13,7 @@ router.get('/test', (req, res) =>  res.json({msg: 'Testimonial Works'}));
 // @route   GET api/testimonial
 // @desc    Get all testimonials
 // @access  Private
-router.get('/', passport.authenticate('jwt', { session: false }),
-    (req, res) => {
+router.get('/', (req, res) => {
       const errors = {};
 
   Testimonial.find()
@@ -54,7 +53,7 @@ router.delete('/:id', passport.authenticate('jwt', { session: false }), (req, re
   .catch(err =>
     res.status(404).json('Unable to delete testimonial')
   );
-  res.send('testimonial deleted sucessfully');
+  
 });
 // @route   PATCH api/testimonial
 // @desc    Update testimonial

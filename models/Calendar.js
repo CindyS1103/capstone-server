@@ -31,6 +31,9 @@ const CalendarSchema = new Schema({
     type: String
 
   },
+  dropoff_address:{
+    type: String
+  },
   parent_name:{
     type: String
 
@@ -45,8 +48,11 @@ const CalendarSchema = new Schema({
   },
   pickup_time:{
     type: String
-
   },
+  ratio:{
+    type: String
+  },
+
   event_name:{
     type: String
   },
